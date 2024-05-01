@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive Box</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+
+  
+<style>
+  body {
+  display: flex;
+  background: white;
+  height:140px;
+}
+  .container {
+    display: flex; /* Flexbox layout */
+    width: 828px;
+    height: 140px;
+    border: 0.5px solid black;
+    overflow: hidden; /* Ensures no overflow from this container */
+  }
+
+  .box {
+    width: 30%; /* 30% of the container's width */
+    height: 140px;
+    background-color: white; /* Light grey background */
+    margin-top:-20px;
+    margin-left:50px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow:show;
+  }
+
+  .profile {
+    width: 70%; /* 70% of the container's width */
+    height: 140px;
+    background-color: white;
+    padding: 10px;
+    left:15px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    text-align: center;
+    position: relative; /* Establishes a positioning context */
+    overflow: show; /* Prevents children from overflowing */
+  }
+
+  .blob {
+    width: 100%; /* Full width of the parent */
+    height: 100%; /* Full height of the parent */
+    position: relative;
+  }
+
+  .blob svg {
+    position: absolute;
+    top: 0;
+    right: 70px;
+    width: 100%; /* Ensures the SVG fills the parent without overflow */
+    height: 100%; /* Ensures the SVG fills the parent without overflow */
+    z-index: 1;
+  }
+  .farzy svg {
+    min-height:100%;
+    margin-left: -40px;
+    width:100%;
+    z-index:-3;
+  }
+
+  
+  .info {
+    position: relative;
+    z-index: 2; /* Higher z-index to ensure it's above the SVG */
+    text-align: center; /* Aligns text to the center */
+    font-size: 24px; /* Larger font size for visibility */
+    padding-top: 30px; /* Adds padding to align text away from the very edge */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  .wrapper {
+    position: absolute;
+    margin-right: 50px;
+    margin-left: -60px;
+    color: black;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 1em;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  .time-label, .date-label {
+    font-size: 15px; /* Adjusted for visibility */
+    color: black; /* Dark grey for better readability */
+    margin-top: 20px;
+    display:flex;
+    flex-direction:row;
+  }
+
+  #clock, #date {
+    color: black;
+    font-size: 15px;
+    margin-bottom: 20px;
+    widht:100%;
+
+  }
+
+  #greeting {
+    position:absolute;
+    font-size: 40px;
+    color: black;
+    margin-top: 70px;
+  }
+</style>
+</head>
+<body>
+ 
+    <div class="profile">
+      <div class="blob">
+        <svg width="3414" height="834" viewBox="0 0 3414 834" fill="none" xmlns="http://www.w3.org/2000/svg">
+</svg>
+        <div class="info">
+          <div class="wrapper">
+              <div id="greeting">Loading...</div>
+             <div class="time-label"><i class="fa-solid fa-clock">&nbsp;&nbsp;</i> <span id="clock">Loading time...</span></div>&nbsp;&nbsp;&nbsp;
+    <div class="date-label"><i class="fa-solid fa-calendar-day">&nbsp;&nbsp;</i> <span id="date">Loading date...</span></div>
+      </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+(function() {
+  'use strict';
+
+  const weekdayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const monthNames = ["January", "February", "March", "April", "May", "June", 
+                      "July", "August", "September", "October", "November", "December"];
+
+  function updateDateTime() {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const displayHours = hours % 12 || 12;  // Converts '0' to '12' for 12-hour format
+
+    // Update Time
+    const timeString = `${displayHours}:${minutes}:${seconds} ${ampm}`;
+    document.getElementById('clock').textContent = timeString;
+
+    // Update Date
+    const weekday = now.getDay();
+    const month = now.getMonth();
+    const day = now.getDate();
+    const year = now.getFullYear();
+    const dateString = `${weekdayNames[weekday]}, ${monthNames[month]} ${day}, ${year}`;
+    document.getElementById('date').textContent = dateString;
+
+    // Update Greeting
+    let greeting;
+    if (hours < 12) {
+      greeting = 'Good Morning';
+    } else if (hours < 18) {
+      greeting = 'Good Afteroon';
+    } else {
+      greeting = 'Good Evening';
+    }
+    document.getElementById('greeting').textContent = greeting;
+
+    // Set timer to update again in the next second
+    setTimeout(updateDateTime, 1000);
+  }
+
+  updateDateTime();  // Start the continuous update process
+}());
+</script>
+
+</html>
