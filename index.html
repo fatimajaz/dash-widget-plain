@@ -14,30 +14,9 @@
   background: white;
   height:140px;
 }
-  .container {
-    display: flex; /* Flexbox layout */
-    width: 828px;
-    height: 140px;
-    border: 0.5px solid black;
-    overflow: hidden; /* Ensures no overflow from this container */
-  }
-
-  .box {
-    width: 30%; /* 30% of the container's width */
-    height: 140px;
-    background-color: white; /* Light grey background */
-    margin-top:-20px;
-    margin-left:50px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    overflow:show;
-  }
 
   .profile {
-    width: 70%; /* 70% of the container's width */
+    width: 100%; /* 70% of the container's width */
     height: 140px;
     background-color: white;
     padding: 10px;
@@ -58,22 +37,6 @@
     position: relative;
   }
 
-  .blob svg {
-    position: absolute;
-    top: 0;
-    right: 70px;
-    width: 100%; /* Ensures the SVG fills the parent without overflow */
-    height: 100%; /* Ensures the SVG fills the parent without overflow */
-    z-index: 1;
-  }
-  .farzy svg {
-    min-height:100%;
-    margin-left: -40px;
-    width:100%;
-    z-index:-3;
-  }
-
-  
   .info {
     position: relative;
     z-index: 2; /* Higher z-index to ensure it's above the SVG */
@@ -131,8 +94,6 @@
  
     <div class="profile">
       <div class="blob">
-        <svg width="3414" height="834" viewBox="0 0 3414 834" fill="none" xmlns="http://www.w3.org/2000/svg">
-</svg>
         <div class="info">
           <div class="wrapper">
               <div id="greeting">Loading...</div>
@@ -192,3 +153,4 @@
 </script>
 
 </html>
+
